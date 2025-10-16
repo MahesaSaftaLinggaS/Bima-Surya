@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Bima Surya - Peralatan Rumah Tangga Berkualitas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background: #0f0f23;
+            min-height: 100vh;
+        }
+        
+        /* Dark Theme Variables */
+        :root {
+            --primary-bg: #0f0f23;
+            --secondary-bg: #1a1a2e;
+            --card-bg: #16213e;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --glow-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(20px); }
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+        
+        .header.scrolled {
+            background: rgba(15, 15, 35, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--glow-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+        
+        .nav-menu a:hover::before {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, #0f0f23 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at top left, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 6px var(--glow-color);
+        }
+        
+        .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { top: 80%; left: 40%; animation-delay: 4s; }
+        .particle:nth-child(4) { top: 40%; left: 70%; animation-delay: 1s; }
+        .particle:nth-child(5) { top: 30%; left: 10%; animation-delay: 3s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.7; }
+            50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease;
+            line-height: 1.1;
+            text-shadow: 0 0 50px var(--glow-color);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            animation: slideInUp 1s ease 0.2s both;
+            font-weight: 400;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            animation: slideInUp 1s ease 0.4s both;
+            box-shadow: 0 10px 30px var(--glow-color);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--glow-color);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: var(--primary-bg);
+            position: relative;
+        }
+        
+        /* Produk Unggulan */
+        .products-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-primary);
+        }
+        
+        .product-card:hover::before {
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--secondary-bg), var(--card-bg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, var(--glow-color) 0%, transparent 70%);
+        }
+        
+        .product-info {
+            padding: 2rem;
+        }
+        
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+        
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary-bg), var(--card-bg));
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            transition: left 0.3s ease;
+        }
+        
+        .product-button:hover::before {
+            left: 0;
+        }
+        
+        .product-button span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow-color);
+            border-color: var(--accent-primary);
+        }
+        
+        .product-button:hover span {
+            color: white;
+        }
+        
+        /* Testimoni */
+        .testimonials {
+            background: var(--secondary-bg);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+        }
+        
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonials .section-title {
+            color: var(--text-primary);
+        }
+        
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2.5rem;
+            padding: 2rem 0;
+            scroll-behavior: smooth;
+        }
+        
+        .testimonial-card {
+            min-width: 320px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-primary);
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            box-shadow: 0 8px 25px var(--glow-color);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0a0a1a 0%, var(--primary-bg) 100%);
+            color: var(--text-primary);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-primary);
+            transform: translateX(5px);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 25px var(--glow-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-slider {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .testimonial-card {
+                min-width: 100%;
+                max-width: 400px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo">Bima Surya</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Peralatan Rumah Tangga Premium</h1>
+            <p>Teknologi Modern untuk Dapur Masa Depan</p>
+            <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20produk%20premium%20Bima%20Surya" target="_blank" rel="noopener noreferrer" class="cta-button">Pesan Sekarang</a>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <!-- Produk Unggulan -->
+        <section id="produk" class="products-section">
+            <h2 class="section-title">Koleksi Premium</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🥘</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Loyang Kue Aluminium</h3>
+                        <p class="product-price">Rp 45.000</p>
+                        <button class="product-button" onclick="pesanProduk('Loyang Kue Aluminium Pro')">
+                            <span>Pesan Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🔥</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Oven</h3>
+                        <p class="product-price">Rp 125.000</p>
+                        <button class="product-button" onclick="pesanProduk('Oven Tangkring Elite')">
+                            <span>Pesan Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🍢</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Bakaran Sate</h3>
+                        <p class="product-price">Rp 25.000</p>
+                        <button class="product-button" onclick="pesanProduk('Tusuk Sate Titanium')">
+                            <span>Pesan Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🍲</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Langseng Kukusan</h3>
+                        <p class="product-price">Rp 85.000</p>
+                        <button class="product-button" onclick="pesanProduk('Langseng Kukusan Smart')">
+                            <span>Pesan Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Testimoni -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2 class="section-title">Review Pelanggan</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">S</div>
+                    <p class="testimonial-text">"Kualitas premium dengan harga terjangkau. Desain modern dan sangat tahan lama. Sudah 2 tahun masih seperti baru!"</p>
+                    <p class="testimonial-name">Sari Dewi</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">B</div>
+                    <p class="testimonial-text">"Pelayanan profesional dan produk berkualitas tinggi. Oven tangkringnya sangat membantu bisnis kuliner saya."</p>
+                    <p class="testimonial-name">Budi Santoso</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">A</div>
+                    <p class="testimonial-text">"Inovasi terdepan dalam peralatan dapur. Recommended untuk yang menginginkan kualitas premium!"</p>
+                    <p class="testimonial-name">Ani Wijaya</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">R</div>
+                    <p class="testimonial-text">"Teknologi modern dengan hasil maksimal. Sudah berlangganan 3 tahun, selalu puas dengan kualitasnya."</p>
+                    <p class="testimonial-name">Rizki Pratama</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>UMKM Bima Surya</h3>
+                <p>Pionir peralatan rumah tangga premium dengan teknologi modern. Dipercaya lebih dari 15.000 pelanggan di seluruh Indonesia untuk kebutuhan dapur masa depan.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <p>📱 WhatsApp: +62 858-6292-3244</p>
+                <p>📧 Email: mahesa67ls@gmail.com</p>
+                <p>🕒 24/7 Customer Support</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Produk Premium</h3>
+                <a href="#produk">Loyang Pro Series</a>
+                <a href="#produk">Oven Elite Collection</a>
+                <a href="#produk">Tusuk Sate Titanium</a>
+                <a href="#produk">Langseng Smart Tech</a>
+                <a href="#produk">Custom Solutions</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Dapatkan update teknologi terbaru dan penawaran eksklusif</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" title="Facebook">📘</a>
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram">📷</a>
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" title="Twitter">🐦</a>
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" title="LinkedIn">💼</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 UMKM Bima Surya. All rights reserved. | Crafted with 💙 for premium experience</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Fungsi pesan produk
+        function pesanProduk(namaProduk) {
+            const pesan = `🌟 Halo Bima Surya Premium! 
+
+Saya tertarik dengan produk: *${namaProduk}*
+
+Mohon informasi detail mengenai:
+✅ Spesifikasi teknis
+✅ Ketersediaan stok
+✅ Promo khusus
+✅ Garansi produk
+
+Terima kasih! 🚀`;
+            
+            const whatsappUrl = `https://wa.me/6285862923244?text=${encodeURIComponent(pesan)}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Enhanced auto scroll testimoni
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        let scrollPosition = 0;
+        let autoScrollInterval;
+        
+        function autoScrollTestimonials() {
+            const cardWidth = 320 + 40; // card width + gap
+            const maxScroll = testimonialSlider.scrollWidth - testimonialSlider.clientWidth;
+            
+            if (scrollPosition >= maxScroll) {
+                scrollPosition = 0;
+            } else {
+                scrollPosition += cardWidth;
+            }
+            
+            testimonialSlider.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(autoScrollTestimonials, 4000);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        startAutoScroll();
+
+        testimonialSlider.addEventListener('mouseenter', stopAutoScroll);
+        testimonialSlider.addEventListener('mouseleave', startAutoScroll);
+
+        // Intersection Observer untuk animasi
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Parallax effect untuk hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Dynamic particle animation
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+            setInterval(() => {
+                const randomX = Math.random() * 100;
+                const randomY = Math.random() * 100;
+                particle.style.left = randomX + '%';
+                particle.style.top = randomY + '%';
+            }, 8000 + (index * 1000));
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f406e3a107c26b',t:'MTc2MDU4MDcwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
